@@ -11,6 +11,7 @@ exports.upsert = (book) => {
         exports.add(book);
     }
 }
+
 exports.add = (book) => {
     books.push(book);
 }
@@ -20,8 +21,7 @@ exports.get = (idx) => {
 }
 
 exports.update = (book) => {
-    books[books.id] = book;
+    books[book.id] = book;
 }
 
 exports.all = books
-

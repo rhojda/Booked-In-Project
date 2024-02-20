@@ -4,7 +4,6 @@ const authors = [
     { firstName: "Cixin", lastName: "Liu" },
 ];
 
-
 exports.upsert = (author) => {
     if (author.id) {
         exports.update(author);
@@ -12,6 +11,7 @@ exports.upsert = (author) => {
         exports.add(author);
     }
 }
+
 exports.add = (author) => {
     authors.push(author);
 }

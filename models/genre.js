@@ -11,6 +11,7 @@ exports.upsert = (genre) => {
         exports.add(genre);
     }
 }
+
 exports.add = (genre) => {
     genres.push(genre);
 }
@@ -20,7 +21,7 @@ exports.get = (idx) => {
 }
 
 exports.update = (genre) => {
-    genres[genres.id] = genre;
+    genres[genre.id] = genre;
 }
 
 exports.all = genres
