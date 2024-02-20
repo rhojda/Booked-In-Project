@@ -1,9 +1,9 @@
 <h1>Authors</h1>
-<a href="/authors/form">Create a new author</a>
+<a href="/authors/form">Create a new author</a> {{!link to create new authors in the author index page}}
 
-{{#each authors}}
+{{#each authors}} {{!using built-in helper for each}}
 <li>
-    {{@index}} - {{this.firstName}} {{this.lastName}}
+    {{@index}} - {{this.firstName}} {{this.lastName}} {{!handlebars helper}}
     <a href="/authors/edit?id={{@index}}">Edit</a>
 </li>
 {{/each}}

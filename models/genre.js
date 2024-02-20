@@ -12,7 +12,7 @@ exports.upsert = (genre) => {
     }
 }
 
-exports.add = (genre) => {
+exports.add = (genre) => { //We are pushing the genre we received into our list of known genres
     genres.push(genre);
 }
 

@@ -12,7 +12,8 @@ exports.upsert = (book) => {
     }
 }
 
-exports.add = (book) => {
+
+exports.add = (book) => { //We are pushing the book we received into our list of known books
     books.push(book);
 }
 

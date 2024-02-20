@@ -1,7 +1,8 @@
 <h1>New Book</h1>
 
+{{!This is the url the form is submitted against}}
 <form action="/books/upsert" role="form" method="post">
-    {{#if book}}
+    {{#if book}} {{!Adding the book index to the form}}
     <div>
         <h2>{{book.title}}</h2>
         <input type="hidden" name="id" value="{{bookIndex}}">
@@ -16,6 +17,5 @@
         <input type="number" step="1" placeholder="2000" id="publishing_Year" name="publishingYear" {{#if
             book}}value="{{book.publishingYear}}" {{/if}}>
     </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

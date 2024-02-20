@@ -12,7 +12,7 @@ exports.upsert = (author) => {
     }
 }
 
-exports.add = (author) => {
+exports.add = (author) => { //We are pushing the author we received into our list of known authors
     authors.push(author);
 }
 

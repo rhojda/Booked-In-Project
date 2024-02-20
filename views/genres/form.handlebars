@@ -1,7 +1,8 @@
 <h1>New Genre</h1>
 
+{{!This is the url the form is submitted against}}
 <form action="/genres/upsert" role="form" method="post">
-    {{#if genre}}
+    {{#if genre}} {{!Adding the genre index to the form}}
     <div>
         <h2>{{genre.genre_title}}</h2>
         <input type="hidden" name="id" value="{{genreIndex}}">
