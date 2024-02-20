@@ -1,6 +1,5 @@
 <h1>Books</h1>
-<ul>
-    {{#each books}} {{!using built-in helper for each}}
-    <li>{{this}}</li>
-    {{/each}}
-</ul>
+<a href="/books/form">Create a new book</a>
+{{#each books}}
+<li>{{this.title}} - {{this.publishingYear}}</li>
+{{/each}}
