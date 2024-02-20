@@ -1,11 +1,26 @@
 const genres = [
-    { genre: "Science-Fiction" },
-    { genre: "Fantasy" },
-    { genre: "Horror" },
+    { genre_title: "Science-Fiction" },
+    { genre_title: "Fantasy" },
+    { genre_title: "Horror" },
 ]
 
+exports.upsert = (genre) => {
+    if (genre.id) {
+        exports.update(genre);
+    } else {
+        exports.add(genre);
+    }
+}
 exports.add = (genre) => {
     genres.push(genre);
 }
 
-exports.all = genres;
+exports.get = (idx) => {
+    return genres[idx];
+}
+
+exports.update = (genre) => {
+    genres[genres.id] = genre;
+}
+
+exports.all = genres

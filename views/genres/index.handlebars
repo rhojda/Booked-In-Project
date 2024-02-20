@@ -1,5 +1,7 @@
 <h1>Genres</h1>
 <a href="/genres/form">Create a new Genre</a>
 {{#each genres}}
-<li>{{this.genre}}</li>
-{{/each}}
+<li>
+    {{@index}} - {{this.genre_title}}
+    <a href="/genres/edit?id={{@index}}">Edit</a>
+</li>{{/each}}
