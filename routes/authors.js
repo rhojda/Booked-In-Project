@@ -1,23 +1,23 @@
-const express = require('express');
-const router = express.Router();
-const Author = require('../models/author');
+const express = require('express'); // Include express
+const router = express.Router(); // define the router
+const Author = require('../models/author'); // importing author model
 
 router.get('/', function (req, res, next) {
     const authors = Author.all;
     res.render('authors/index', { title: 'BookedIn || Authors', authors: authors });
 });
 
-router.get('/form', async (req, res, next) => {
+router.get('/form', async (req, res, next) => { // form route added 
     res.render('authors/form', { title: 'BookedIn || Authors' });
 });
 
-router.get('/edit', async (req, res, next) => {
+router.get('/edit', async (req, res, next) => { // edit route added 
     let authorIndex = req.query.id;
     let author = Author.get(authorIndex);
     res.render('authors/form', { title: 'BookedIn || Authors', author: author, authorIndex: authorIndex });
 });
 
-router.post('/upsert', async (req, res, next) => {
+router.post('/upsert', async (req, res, next) => { // update route added 
     console.log('body: ' + JSON.stringify(req.body));
     Author.upsert(req.body);
     let createdOrupdated = req.body.id ? 'updated' : 'created';
@@ -26,7 +26,7 @@ router.post('/upsert', async (req, res, next) => {
         intro: 'Success!',
         message: `the author has been ${createdOrupdated}!`,
     };
-    res.redirect(303, '/authors');
+    res.redirect(303, '/authors'); //redirect back to the authors index page
 });
 
 

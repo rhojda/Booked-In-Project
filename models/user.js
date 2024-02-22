@@ -12,7 +12,7 @@ const encryptPassword = (password, salt) => {
     return crypto.pbkdf2Sync(password, salt, 310000, 32, 'sha256').toString('hex')
 }
 
-exports.add = (user) => {
+exports.add = (user) => {  //pushing the users we received into our list of known users
     let salt = createSalt();
     let new_user = {
         email: user.email,

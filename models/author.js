@@ -4,7 +4,7 @@ const authors = [
     { firstName: "Cixin", lastName: "Liu" },
 ];
 
-exports.add = (author) => {
+exports.add = (author) => { //pushing the author we received into our list of known authors
     authors.push(author);
 }
 

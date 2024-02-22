@@ -4,7 +4,7 @@ const books = [
     { title: "The Three-Body Problem", publishingYear: 2008, authorIds: ["0", "1"] },
 ]
 
-exports.add = (book) => {
+exports.add = (book) => { //pushing the book we received into our list of known books
     books.push(book);
 }
 

@@ -1,8 +1,8 @@
 const express = require('express'); // Include express
 const router = express.Router(); // define the router
 
-router.get('/', function (req, res, next) {
-    res.render('index', { title: 'BookedIn' });
+router.get('/', function (req, res, next) { // this is like the app.use, but specifically for routing
+    res.render('index', { title: 'BookedIn' }); // new template file and passing along a title variable
 });
 
 

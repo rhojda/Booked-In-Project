@@ -4,7 +4,7 @@ const genres = [
     { genre_title: "Horror" },
 ]
 
-exports.add = (genre) => {
+exports.add = (genre) => { //pushing the genre we received into our list of known genres
     genres.push(genre);
 }
 

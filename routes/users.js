@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user');
+const express = require('express'); // Include express
+const router = express.Router(); // define the router
+const User = require('../models/user'); // importing user model
 
-router.get('/register', async (req, res, next) => {
+router.get('/register', async (req, res, next) => { // register route added 
     res.render('users/register', { title: 'BookedIn || Registration' });
 });
 
@@ -17,7 +17,7 @@ router.post('/register', async (req, res, next) => {
     res.redirect(303, '/');
 });
 
-router.get('/login', async (req, res, next) => {
+router.get('/login', async (req, res, next) => { // login route added 
     res.render('users/login', { title: 'BookedIn || Login' });
 });
 
@@ -44,7 +44,7 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
-router.post('/logout', async (req, res, next) => {
+router.post('/logout', async (req, res, next) => { // logout route added 
     delete req.session.currentUser
     req.session.flash = {
         type: 'info',

@@ -1,22 +1,20 @@
-const express = require('express')
-const bodyParser = require('body-parser')
+const express = require('express'); // Include the express package
+const app = express(); // call the express function to create the app
+const port = 3000; // set the port of the web server
+
+const bodyParser = require('body-parser'); //Wiring up body-parser
 
 const { credentials } = require('./config')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 
+const indexRouter = require('./routes/index'); // Include the new index.js route file
+const authorsRouter = require('./routes/authors'); // Include the new authors.js route file
+const booksRouter = require('./routes/books'); // Include the new books.js route file
+const genresRouter = require('./routes/genres'); // Include the new genres.js route file
+const usersRouter = require('./routes/users'); // Include the new routes.js route file
 
-
-const indexRouter = require('./routes/index');
-const authorsRouter = require('./routes/authors');
-const booksRouter = require('./routes/books');
-const genresRouter = require('./routes/genres');
-const usersRouter = require('./routes/users');
-
-const app = express()
-const port = 3000
-
-// view engine setup
+//register our express-handlebars 
 var handlebars = require('express-handlebars').create({
     helpers: {
         eq: (v1, v2) => v1 == v2,
@@ -62,26 +60,31 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/', indexRouter);
-app.use('/authors', authorsRouter);
-app.use('/books', booksRouter);
-app.use('/genres', genresRouter);
-app.use('/users', usersRouter);
+app.use('/', indexRouter); // attaching the router to the “/” url path
+app.use('/authors', authorsRouter); // attaching the router to the “/authors” url path
+app.use('/books', booksRouter); // attaching the router to the “/books” url path
+app.use('/genres', genresRouter); // attaching the router to the “/genres” url path
+app.use('/users', usersRouter); // attaching the router to the “/users” url path
+
+/* GET home page. */
+app.use('/', function (req, res, next) { // the / stands for the root route, or homepage
+    res.send("<h1>Hello BookedIn</h1>");
+});
 
 // custom 404 page
-app.use((req, res) => {
-    res.status(404)
-    res.send('<h1>404 - Not Found</h1>')
+app.use((req, res) => { // set the “default” page handler
+    res.status(404) // set the response status code to 404
+    res.send('<h1>404 - Not Found</h1>') // set the content of the response
 })
 
 // custom 500 page
-app.use((err, req, res, next) => {
-    console.error(err.message)
-    res.type('text/plain')
-    res.status(500)
-    res.send('500 - Server Error')
+app.use((err, req, res, next) => { // set the function of how to deal with errors
+    console.error(err.message) // get the error message and write it to the console
+    res.type('text/plain') // Set the response type to plain text
+    res.status(500) // set the response status code to 500
+    res.send('500 - Server Error') // set the content of the response
 })
 
-app.listen(port, () => console.log(
-    `Express started on http://localhost:${port}; ` +
+app.listen(port, () => console.log( // set our app up to listen to a given port
+    `Express started on http://localhost:${port}; ` + // when listening has started execute this function
     `press Ctrl-C to terminate.`))
