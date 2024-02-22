@@ -1,6 +1,7 @@
 const express = require('express');
 const Book = require('../models/book'); //Note: By convention we import these with an Uppercase first letter
 const Author = require('../models/author');
+const Genre = require('../models/genre');
 const router = express.Router();
 
 router.get('/', function (req, res, next) {
@@ -9,14 +10,14 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/form', async (req, res, next) => {
-    res.render('books/form', { title: 'BookedIn || Books', authors: Author.all });
+    res.render('books/form', { title: 'BookedIn || Books', authors: Author.all, genres: Genre.all });
 });
 
 router.get('/edit', async (req, res, next) => {
     let bookIndex = req.query.id;
     let book = Book.get(bookIndex);
     // Passing the index from the router so that we know which book to update
-    res.render('books/form', { title: 'BookedIn || Books', book: book, bookIndex: bookIndex, authors: Author.all });
+    res.render('books/form', { title: 'BookedIn || Books', book: book, bookIndex: bookIndex, authors: Author.all, genres: Genre.all });
 });
 
 router.get('/show/:id', async (req, res, next) => {
@@ -27,8 +28,12 @@ router.get('/show/:id', async (req, res, next) => {
     if (templateVars.book.authorIds) {
         templateVars['authors'] = templateVars.book.authorIds.map((authorIds) => Author.get(authorIds))
     }
+    if (templateVars.book.genreIds) {
+        templateVars['genres'] = templateVars.book.genreIds.map((genreIds) => Genre.get(genreIds))
+    }
     res.render('books/show', templateVars);
 });
+
 
 router.post('/upsert', async (req, res, next) => {
     console.log('body: ' + JSON.stringify(req.body));

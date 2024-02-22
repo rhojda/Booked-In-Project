@@ -10,8 +10,11 @@ const genresRouter = require('./routes/genres'); // Include the new genres.js ro
 const app = express() // call the express function to create the app
 const port = 3000// set the port of the web server
 
-//extra platform setup
-app.use(bodyParser.urlencoded({ extended: true })); //Wiring body-parser
+const { credentials } = require('./config')
+const cookieParser = require('cookie-parser')
+const expressSession = require('express-session')
+
+
 
 // view engine setup and register our `express-handlebars`
 var handlebars = require('express-handlebars').create({
@@ -57,6 +60,17 @@ app.use((err, req, res, next) => { // set the function of how to deal with error
     res.status(500) // set the response status code to 500
     res.send('500 - Server Error') // set the content of the response
 })
+
+//extra platform setup
+app.use(bodyParser.urlencoded({ extended: true })); //Wiring body-parser
+app.use(cookieParser(credentials.cookieSecret));
+
+app.use(expressSession({
+    secret: credentials.cookieSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+}));
 
 app.listen(port, () => console.log( // set our app up to listen to a given port.
     `Express started on http://localhost:${port}; ` +
