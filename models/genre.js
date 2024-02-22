@@ -4,15 +4,7 @@ const genres = [
     { genre_title: "Horror" },
 ]
 
-exports.upsert = (genre) => {
-    if (genre.id) {
-        exports.update(genre);
-    } else {
-        exports.add(genre);
-    }
-}
-
-exports.add = (genre) => { //We are pushing the genre we received into our list of known genres
+exports.add = (genre) => {
     genres.push(genre);
 }
 
@@ -22,6 +14,14 @@ exports.get = (idx) => {
 
 exports.update = (genre) => {
     genres[genre.id] = genre;
+}
+
+exports.upsert = (genre) => {
+    if (genre.id) {
+        exports.update(genre);
+    } else {
+        exports.add(genre);
+    }
 }
 
 exports.all = genres

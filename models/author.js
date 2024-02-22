@@ -4,15 +4,7 @@ const authors = [
     { firstName: "Cixin", lastName: "Liu" },
 ];
 
-exports.upsert = (author) => {
-    if (author.id) {
-        exports.update(author);
-    } else {
-        exports.add(author);
-    }
-}
-
-exports.add = (author) => { //We are pushing the author we received into our list of known authors
+exports.add = (author) => {
     authors.push(author);
 }
 
@@ -22,6 +14,14 @@ exports.get = (idx) => {
 
 exports.update = (author) => {
     authors[author.id] = author;
+}
+
+exports.upsert = (author) => {
+    if (author.id) {
+        exports.update(author);
+    } else {
+        exports.add(author);
+    }
 }
 
 exports.all = authors

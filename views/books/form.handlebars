@@ -1,8 +1,7 @@
 <h1>New Book</h1>
 
-{{!This is the url the form is submitted against}}
 <form action="/books/upsert" role="form" method="post">
-    {{#if book}} {{!Adding the book index to the form}}
+    {{#if book}}
     <div>
         <h2>{{book.title}}</h2>
         <input type="hidden" name="id" value="{{bookIndex}}">
@@ -13,8 +12,8 @@
         <input type="text" id="title" name="title" {{#if book}}value="{{book.title}}" {{/if}}>
     </div>
     <div>
-        <label for="publishing_Year">Publishing year</label>
-        <input type="number" step="1" placeholder="2000" id="publishing_Year" name="publishingYear" {{#if
+        <label for="publishing_year">Publishing year</label>
+        <input type="number" step="1" placeholder="2000" id="publishing_year" name="publishingYear" {{#if
             book}}value="{{book.publishingYear}}" {{/if}}>
     </div>
     <div class="mb-3">
@@ -28,16 +27,18 @@
             {{/each}}
         </select>
     </div>
-    <div class="mb-3">
-        <label for="genreIds">Genres</label>
-        <select name="genreIds" multiple id="genreIds">
-            <option disabled value>-- select Genre --</option>
-            {{#each genres}}
-            <option value="{{@index}}" {{#if (and @root.book (in @root.book.genresIds @index))}}selected{{/if}}>
-                {{this.genre_title}}
-            </option>
-            {{/each}}
-        </select>
+    <div>
+        <div class="mb-3">
+            <label for="genreId">Genre</label>
+            <select name="genreId" id="genreId">
+                <option disabled value>-- select Genre --</option>
+                {{#each genres}}
+                <option value="{{@index}}">
+                    {{this.genre_title}}
+                </option>
+                {{/each}}
+            </select>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -7,8 +7,8 @@
 <p>
     Originally published in {{book.publishingYear}}
 </p>
-{{#if genres}}
+{{#if genre}}
 <p>
-    Genre is {{#each genres}}{{this.genre_title}} {{#unless @last}}, {{/unless}}{{/each}}
+    Genre is {{genre.genre_title}}
 </p>
 {{/if}}
