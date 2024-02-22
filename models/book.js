@@ -1,7 +1,7 @@
 const books = [
-    { title: "Leviathan Wakes", publishingYear: 2011, authorIds: ["0", "1"] },
-    { title: "Columbus Day", publishingYear: 2017 },
-    { title: "The Three-Body Problem", publishingYear: 2008 },
+    { title: "Leviathan Wakes", publishingYear: 2011, authorIds: ["0"] },
+    { title: "Columbus Day", publishingYear: 2017, authorIds: ["1"] },
+    { title: "The Three-Body Problem", publishingYear: 2008, authorIds: ["2"] },
 ]
 
 exports.upsert = (book) => {
@@ -14,8 +14,6 @@ exports.upsert = (book) => {
         exports.add(book);
     }
 }
-
-
 
 exports.add = (book) => { //We are pushing the book we received into our list of known books
     books.push(book);

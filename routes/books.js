@@ -25,11 +25,10 @@ router.get('/show/:id', async (req, res, next) => {
         book: Book.get(req.params.id)
     }
     if (templateVars.book.authorIds) {
-        templateVars['author'] = Author.get(templateVars.book.authorIds);
+        templateVars['authors'] = templateVars.book.authorIds.map((authorIds) => Author.get(authorIds))
     }
     res.render('books/show', templateVars);
 });
-
 
 router.post('/upsert', async (req, res, next) => {
     console.log('body: ' + JSON.stringify(req.body));

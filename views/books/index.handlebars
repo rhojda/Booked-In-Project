@@ -1,7 +1,5 @@
 <h1>Books</h1>
 <a href="/books/form">Create a new book</a> {{!link to create new books in the author index page}}
-
-
 {{#each books}}
 <li>
     <a href="/books/show/{{@index}}">Details {{@index}} - {{this.title}} - {{this.publishingYear}}</a>
