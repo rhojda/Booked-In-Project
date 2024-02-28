@@ -1,8 +1,9 @@
+var crypto = require('crypto'); // use the build in cryptography functions from JS
+
 const users = [
-    { email: "rvanmech@pratt.edu", name: "Rik", password: "password" }
+    { email: "rhojda@pratt.edu", name: "Rafaela Hojda", salt: "f837515c3aa6b07486568fb481cbc784", encryptedPassword: "7c4857da8274c077384bfa3b87157f7dd3f5d3ee555c8a16b16e906e68f11fe2" }
 ];
 
-var crypto = require('crypto'); // use the build in cryptography functions from JS
 
 const createSalt = () => { // local function to create a salt
     return crypto.randomBytes(16).toString('hex'); // a salt is just some random text
@@ -40,4 +41,4 @@ exports.login = (login) => {
     return null; // we return null
 }
 
-exports.all = users
+exports.all = users;
