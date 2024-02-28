@@ -8,13 +8,25 @@ router.get('/register', async (req, res, next) => { // register route added
 
 router.post('/register', async (req, res, next) => {
     console.log('body: ' + JSON.stringify(req.body));
-    User.add(req.body);
-    req.session.flash = {
-        type: 'info',
-        intro: 'Success!',
-        message: `the user has been created!`,
-    };
-    res.redirect(303, '/');
+    const user = User.getByEmail(req.body.email)
+    if (user) {
+        res.render('users/register', {
+            title: 'BookedIn || Login',
+            flash: {
+                type: 'danger',
+                intro: 'Error!',
+                message: `A user with this email already exists`
+            }
+        });
+    } else {
+        User.add(req.body);
+        req.session.flash = {
+            type: 'info',
+            intro: 'Success!',
+            message: `the user has been created!`,
+        };
+        res.redirect(303, '/');
+    }
 });
 
 router.get('/login', async (req, res, next) => { // login route added 
@@ -54,27 +66,6 @@ router.post('/logout', async (req, res, next) => { // logout route added
     res.redirect(303, '/');
 });
 
-router.post('/register', async (req, res, next) => {
-    console.log('body: ' + JSON.stringify(req.body));
-    const user = User.getByEmail(req.body.email)
-    if (user) {
-        res.render('users/register', {
-            title: 'BookedIn || Login',
-            flash: {
-                type: 'danger',
-                intro: 'Error!',
-                message: `A user with this email already exists`
-            }
-        });
-    } else {
-        User.add(req.body);
-        req.session.flash = {
-            type: 'info',
-            intro: 'Success!',
-            message: `the user has been created!`,
-        };
-        res.redirect(303, '/');
-    }
-});
+
 
 module.exports = router;

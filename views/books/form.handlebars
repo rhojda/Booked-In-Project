@@ -1,6 +1,6 @@
 <h1>New Book</h1>
 
-<form action="/books/upsert" role="form" method="post">
+<form action="/books/upsert" role="form" method="post"> {{!ensuring the form is submitted with the post method}}
     {{#if book}}
     <div>
         <h2>{{book.title}}</h2>
