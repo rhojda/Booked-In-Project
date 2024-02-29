@@ -4,6 +4,7 @@ const { credentials } = require('./config')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const csrf = require('csurf')
+const path = require('path');
 
 const indexRouter = require('./routes/index'); // Include the new index.js route file
 const authorsRouter = require('./routes/authors'); // Include the new authors.js route file
@@ -76,6 +77,7 @@ app.use('/books', booksRouter); // attaching the router to the “/books” url 
 app.use('/genres', genresRouter); // attaching the router to the “/genres” url path
 app.use('/users', usersRouter); // attaching the router to the “/users” url path
 app.use('/books_users', booksUsersRouter);
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')))
 
 
 /* GET home page. */
