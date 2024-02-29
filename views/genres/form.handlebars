@@ -2,6 +2,7 @@
 
 {{!This is the url the form is submitted against}}
 <form action="/genres/upsert" role="form" method="post"> {{!ensuring the form is submitted with the post method}}
+    <input type="hidden" name="_csrf" value="{{_csrfToken}}">
     {{#if genre}}
     <div>
         <h2>{{genre.genre_title}}</h2>
