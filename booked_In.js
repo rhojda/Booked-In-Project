@@ -1,18 +1,19 @@
 const express = require('express'); // Include the express package
-const app = express(); // call the express function to create the app
-const port = 3000; // set the port of the web server
-
 const bodyParser = require('body-parser'); //Wiring up body-parser
-
 const { credentials } = require('./config')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
+const csrf = require('csurf')
 
 const indexRouter = require('./routes/index'); // Include the new index.js route file
 const authorsRouter = require('./routes/authors'); // Include the new authors.js route file
 const booksRouter = require('./routes/books'); // Include the new books.js route file
 const genresRouter = require('./routes/genres'); // Include the new genres.js route file
 const usersRouter = require('./routes/users'); // Include the new routes.js route file
+
+const app = express(); // call the express function to create the app
+const port = 3000; // set the port of the web server
+
 
 //register our express-handlebars 
 var handlebars = require('express-handlebars').create({
@@ -48,6 +49,13 @@ app.use(expressSession({
     saveUninitialized: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
+
+// this must come after we link in body-parser, cookie-parser, and express-session
+app.use(csrf({ cookie: true }))
+app.use((req, res, next) => {
+    res.locals._csrfToken = req.csrfToken()
+    next()
+})
 
 app.use((req, res, next) => {
     res.locals.flash = req.session.flash
