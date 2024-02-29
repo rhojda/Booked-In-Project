@@ -1,8 +1,10 @@
 const express = require('express'); // Include express
 const router = express.Router(); // define the router
+
 const Book = require('../models/book'); // importing book model
 const Author = require('../models/author'); // importing author model
 const Genre = require('../models/genre'); // importing genre model
+const BookUser = require('../models/book_user');
 
 
 router.get('/', function (req, res, next) {
@@ -23,13 +25,18 @@ router.get('/edit', async (req, res, next) => { // edit route added
 router.get('/show/:id', async (req, res, next) => { // show route added 
     let templateVars = {
         title: 'BookedIn || Books',
-        book: Book.get(req.params.id)
+        book: Book.get(req.params.id),
+        bookId: req.params.id,
+        statuses: BookUser.statuses
     }
     if (templateVars.book.authorIds) {
         templateVars['authors'] = templateVars.book.authorIds.map((authorId) => Author.get(authorId))
     }
     if (templateVars.book.genreId) {
         templateVars['genre'] = Genre.get(templateVars.book.genreId);
+    }
+    if (req.session.currentUser) { //if we have a logged in user
+        templateVars['bookUser'] = BookUser.get(req.params.id, req.session.currentUser.email); //get the book user based on the current book and user email
     }
     res.render('books/show', templateVars);
 });

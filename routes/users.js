@@ -1,8 +1,10 @@
 const express = require('express'); // Include express
 const router = express.Router(); // define the router
-const User = require('../models/user'); // importing user model
-const helpers = require('./helpers')
 
+const User = require('../models/user'); // importing user model
+const helpers = require('./helpers');
+const Book = require('../models/book');
+const BookUser = require('../models/book_user');
 
 router.get('/register', async (req, res, next) => {
     if (helpers.isLoggedIn(req, res)) {
@@ -78,6 +80,22 @@ router.post('/logout', async (req, res, next) => { // logout route added
         message: 'You are now logged out',
     };
     res.redirect(303, '/');
+});
+
+router.get('/profile', async (req, res, next) => {
+    if (helpers.isNotLoggedIn(req, res)) {
+        return
+    }
+    const booksUser = BookUser.AllForUser(req.session.currentUser.email);
+    booksUser.forEach((bookUser) => { //we get all books_users for the current user
+        bookUser.book = Book.get(bookUser.bookId) //get the book information
+    })
+    res.render('users/profile',
+        {
+            title: 'BookedIn || Profile',
+            user: req.session.currentUser, //setting the user to current user
+            booksUser: booksUser
+        });
 });
 
 module.exports = router;

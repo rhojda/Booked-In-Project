@@ -9,7 +9,9 @@ const indexRouter = require('./routes/index'); // Include the new index.js route
 const authorsRouter = require('./routes/authors'); // Include the new authors.js route file
 const booksRouter = require('./routes/books'); // Include the new books.js route file
 const genresRouter = require('./routes/genres'); // Include the new genres.js route file
-const usersRouter = require('./routes/users'); // Include the new routes.js route file
+const usersRouter = require('./routes/users'); // Include the new users.js route file
+const booksUsersRouter = require('./routes/books_users');
+
 
 const app = express(); // call the express function to create the app
 const port = 3000; // set the port of the web server
@@ -73,6 +75,8 @@ app.use('/authors', authorsRouter); // attaching the router to the “/authors�
 app.use('/books', booksRouter); // attaching the router to the “/books” url path
 app.use('/genres', genresRouter); // attaching the router to the “/genres” url path
 app.use('/users', usersRouter); // attaching the router to the “/users” url path
+app.use('/books_users', booksUsersRouter);
+
 
 /* GET home page. */
 app.use('/', function (req, res, next) { // the / stands for the root route, or homepage

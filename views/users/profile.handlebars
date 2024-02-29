@@ -1,0 +1,7 @@
+<h1>{{currentUser.name}}</h1>
+
+<ul>
+    {{#each booksUser}}
+    <li>{{this.book.title}} -- {{this.status}}</li>
+    {{/each}}
+</ul>

@@ -1,30 +1,33 @@
 const books_users = [
-    { bookId: "0", userEmail: "rhojda@pratt.edu", status: "finished" },
-    { bookId: "1", userEmail: "rhojdah@pratt.edu", status: "reading" },
-    { bookId: "2", userEmail: "rhojda@pratt.edu", status: "todo" },
-    { bookId: "3", userEmail: "rhojda@pratt.edu", status: "todo" }
+    { bookId: "0", userEmail: "rhojda@pratt.edu", status: "Finished" },
+    { bookId: "1", userEmail: "rhojdah@pratt.edu", status: "Reading" },
+    { bookId: "2", userEmail: "rhojda@pratt.edu", status: "To-do" },
+    { bookId: "3", userEmail: "rhojda@pratt.edu", status: "To-do" }
 ];
 
 exports.statuses = [ //making the statuses universally available
-    "todo", "reading", "finished"
+    "To-do", "Reading", "Finished"
 ]
 
 exports.add = (book_user) => { //add is just like any other add we’ve done 
     books_users.push(book_user);
 }
 
+// A method to return the status of a given book
 exports.get = (bookId, userEmail) => {
     return books_users.find((book_user) => { //The find method will do exactly what we need
         return book_user.bookId == bookId && book_user.userEmail == userEmail;
     });
 }
 
+// A method to return all the books with status for a given user
 exports.AllForUser = (userEmail) => {
     return books_users.filter((book_user) => { //filter will return all the matching ones
         return book_user.userEmail == userEmail;
     });
 }
 
+// A method to update the status of a book
 exports.update = (idx, book_user) => {
     books_users[idx] = book_user; //The find method will do exactly what we need
 }
