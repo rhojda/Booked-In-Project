@@ -1,12 +1,20 @@
 const express = require('express'); // Include express
 const router = express.Router(); // define the router
 const User = require('../models/user'); // importing user model
+const helpers = require('./helpers')
 
-router.get('/register', async (req, res, next) => { // register route added 
+
+router.get('/register', async (req, res, next) => {
+    if (helpers.isLoggedIn(req, res)) {
+        return
+    }
     res.render('users/register', { title: 'BookedIn || Registration' });
 });
 
 router.post('/register', async (req, res, next) => {
+    if (helpers.isLoggedIn(req, res)) {
+        return
+    }
     console.log('body: ' + JSON.stringify(req.body));
     const user = User.getByEmail(req.body.email)
     if (user) {
@@ -30,10 +38,16 @@ router.post('/register', async (req, res, next) => {
 });
 
 router.get('/login', async (req, res, next) => { // login route added 
+    if (helpers.isLoggedIn(req, res)) {
+        return
+    }
     res.render('users/login', { title: 'BookedIn || Login' });
 });
 
 router.post('/login', async (req, res, next) => {
+    if (helpers.isLoggedIn(req, res)) {
+        return
+    }
     console.log('body: ' + JSON.stringify(req.body));
     const user = User.login(req.body)
     if (user) {
@@ -65,7 +79,5 @@ router.post('/logout', async (req, res, next) => { // logout route added
     };
     res.redirect(303, '/');
 });
-
-
 
 module.exports = router;
