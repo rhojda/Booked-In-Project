@@ -1,10 +1,12 @@
 const genres = [
-    { genre_title: "Science-Fiction" },
-    { genre_title: "Fantasy" },
-    { genre_title: "Horror" },
-]
+    { genre: "Sience Fiction" },
+    { genre: "Fantasy" },
+    { genre: "Romance" },
+    { genre: "Mystery" },
+    { genre: "Horror" }
+];
 
-exports.add = (genre) => { //pushing the genre we received into our list of known genres
+exports.add = (genre) => {
     genres.push(genre);
 }
 

@@ -5,6 +5,7 @@ const Book = require('../models/book'); // importing book model
 const Author = require('../models/author'); // importing author model
 const Genre = require('../models/genre'); // importing genre model
 const BookUser = require('../models/book_user');
+const Comment = require('../models/comment');
 
 
 router.get('/', function (req, res, next) {
@@ -27,7 +28,8 @@ router.get('/show/:id', async (req, res, next) => { // show route added
         title: 'BookedIn || Books',
         book: Book.get(req.params.id),
         bookId: req.params.id,
-        statuses: BookUser.statuses
+        statuses: BookUser.statuses,
+        comments: Comment.AllForBook(req.params.id)
     }
     if (templateVars.book.authorIds) {
         templateVars['authors'] = templateVars.book.authorIds.map((authorId) => Author.get(authorId))

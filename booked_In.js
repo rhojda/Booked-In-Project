@@ -12,7 +12,7 @@ const booksRouter = require('./routes/books'); // Include the new books.js route
 const genresRouter = require('./routes/genres'); // Include the new genres.js route file
 const usersRouter = require('./routes/users'); // Include the new users.js route file
 const booksUsersRouter = require('./routes/books_users');
-
+const commentsRouter = require('./routes/comments');
 
 const app = express(); // call the express function to create the app
 const port = 3000; // set the port of the web server
@@ -78,6 +78,7 @@ app.use('/genres', genresRouter); // attaching the router to the “/genres” u
 app.use('/users', usersRouter); // attaching the router to the “/users” url path
 app.use('/books_users', booksUsersRouter);
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')))
+app.use('/comments', commentsRouter);
 
 
 /* GET home page. */

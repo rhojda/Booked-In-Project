@@ -1,9 +1,8 @@
 <h1>Genres</h1>
-<a href="/genres/form">Create a new Genre</a> {{!link to create new genres in the author index page}}
-
+<a href="/Genres/form">Create a new Genre</a>
 {{#each genres}}
 <li>
-    {{@index}} - {{this.genre_title}}
-    <a href="/genres/edit?id={{@index}}">Edit</a> {{!link to edit genres in the books index page}}
+    {{@index}} - {{this.genre}}
+    <a href="/Genres/edit?id={{@index}}">Edit</a>
 </li>
 {{/each}}

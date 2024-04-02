@@ -12,7 +12,7 @@
 
 {{#if genre}}
 <p>
-    Genre is {{genre.genre_title}}
+    Genre is {{genre.genre}}
 </p>
 {{/if}}
 
@@ -34,5 +34,30 @@
         </select>
         <button type="submit">Submit</button>
     </form>
+</div>
+
+<div>
+    <form action="/comments/upsert" role="form" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+        <input type="hidden" name="bookId" value="{{bookId}}">
+        <input type="hidden" name="userEmail" value="{{currentUser.email}}">
+        <label for="comment">
+            <h1>Comment</h1>
+        </label>
+        <div>
+            <textarea id="comment"></textarea>
+        </div>
+
+        <button type="new_comment">New Comment</button>
+    </form>
+    {{#each comments}}
+    <p>
+        {{this.text}}
+    </p>
+    <p>
+        <a href="/books/edit?id={{@index}}">Edit</a>
+    </p>
+
+    {{/each}}
 </div>
 {{/if}}
