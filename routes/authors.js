@@ -2,19 +2,17 @@ const express = require('express'); // Include express
 const router = express.Router(); // define the router
 const Author = require('../models/author'); // importing author model
 
-/*
-Comment out or delete reference to the hard-coded authors array
-*/
-
-router.get('/', function (req, res, next) {
-    const authors = Author.all;
+// Call the async function from the Author model to get all data and wait for it to complete
+router.get('/', async (req, res, next) => {
+    let authors = await Author.all();
     res.render('authors/index', { title: 'BookedIn || Authors', authors: authors });
 });
 
-
 /*
-router.get('/', async (req, res, next) => {
-    let authors = await Author.all(); //get all data and wait for it to complete
+Comment out or delete reference to the hard-coded authors array
+
+router.get('/', function (req, res, next) {
+    const authors = Author.all;
     res.render('authors/index', { title: 'BookedIn || Authors', authors: authors });
 });
 */
