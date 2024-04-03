@@ -23,7 +23,7 @@ router.get('/edit', async (req, res, next) => { // edit route added
     res.render('books/form', { title: 'BookedIn || Books', book: book, bookIndex: bookIndex, authors: Author.all, genres: Genre.all });
 });
 
-router.get('/show/:id', async (req, res, next) => { // show route added 
+router.get('/show/:id', async (req, res, next) => {
     let templateVars = {
         title: 'BookedIn || Books',
         book: Book.get(req.params.id),
@@ -32,13 +32,13 @@ router.get('/show/:id', async (req, res, next) => { // show route added
         comments: Comment.AllForBook(req.params.id)
     }
     if (templateVars.book.authorIds) {
-        templateVars['authors'] = templateVars.book.authorIds.map((authorId) => Author.get(authorId))
+        templateVars['authors'] = templateVars.book.authorIds.map((authorId) => Author.get(authorId));
     }
     if (templateVars.book.genreId) {
-        templateVars['genre'] = Genre.get(templateVars.book.genreId);
+        templateVars['genres'] = Genre.get(templateVars.book.genreId);
     }
-    if (req.session.currentUser) { //if we have a logged in user
-        templateVars['bookUser'] = BookUser.get(req.params.id, req.session.currentUser.email); //get the book user based on the current book and user email
+    if (req.session.currentUser) {
+        templateVars['bookUser'] = BookUser.get(req.params.id, req.session.currentUser.email);
     }
     res.render('books/show', templateVars);
 });
