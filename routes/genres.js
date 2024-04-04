@@ -2,10 +2,20 @@ const express = require('express');
 const router = express.Router();
 const Genre = require('../models/genre');
 
+// Call the async function from the Genre model to get all data and wait for it to complete
+router.get('/', async (req, res, next) => {
+    let genres = await Genre.all();
+    res.render('genres/index', { title: 'BookedIn || Genres', genres: genres });
+});
+
+/*
+Comment out or delete reference to the hard-coded authors array
+
 router.get('/', function (req, res, next) {
     const genres = Genre.all;
     res.render('genres/index', { title: 'BookedIn || Genres', genres: genres });
 });
+*/
 
 router.get('/form', async (req, res, next) => {
     res.render('genres/form', { title: 'BookedIn || Genres' });
