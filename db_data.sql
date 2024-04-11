@@ -12,3 +12,11 @@ insert into books values (default, 'Dune', '1', '1965');
 insert into books values (default, 'Steve Jobs', '2', '2011');
 insert into books values (default, 'Pride and Prejudice', '4', '1813');
 insert into books values (default, 'To Kill a Mockingbird', '4', '1965');
+insert into books values (default, 'Leviathan Wakes', '-', '2011');
+insert into books values (default, 'Columbus Day','-', '2017');
+insert into books values (default, 'The Three-Body Problem', '-', '2008');
+insert into books values (default, 'Caliban’s War', '-', '2012');
+insert into books values (default, 'Abaddon’s Gate', '-', '2013');
+insert into books values (default, 'Cibola Burn', '-', '2014');
+insert into books values (default, 'Nemesis Games', '-', '2015');
+

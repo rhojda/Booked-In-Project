@@ -1,15 +1,16 @@
 <h1>{{book.title}}</h1>
-{{#if authors}}
+{{#if book.authors}}
 <p>
-    Written by {{#each authors}}{{this.firstName}} {{this.lastName}}{{#unless @last}}, {{/unless}}{{/each}}
+    Written by {{#each book.authors}}{{this.firstName}} {{this.lastName}}{{#unless @last}}, {{/unless}}{{/each}}
 </p>
 {{/if}}
+
 <p>
     Originally published in {{book.publishingYear}}
 </p>
 {{#if genre}}
 <p>
-    genre: {{genre.genre}}
+    genre: {{genre.name}}
 </p>
 {{/if}}
 
@@ -17,15 +18,15 @@
 <div>
     <form action="/books_users/upsert" role="form" method="post">
         <input type="hidden" name="_csrf" value="{{_csrfToken}}">
-        <input type="hidden" name="bookId" value="{{bookId}}">
-        <input type="hidden" name="userEmail" value="{{currentUser.email}}">
-        <label for="status">Status</label>
-        <select name="status" id="status">
-            {{#unless (and bookUser bookUser.status)}}
-            <option disabled selected value>-- select status --</option>
+        <input type="hidden" name="bookId" value="{{book.id}}">
+        <input type="hidden" name="userId" value="{{currentUser.id}}">
+        <label for="read_status">Status</label>
+        <select name="readStatus" id="readStatus">
+            {{#unless (and bookUser bookUser.readStatus)}}
+            <option disabled selected value>-- select Status --</option>
             {{/unless}}
-            {{#each statuses}}
-            <option value="{{this}}" {{#if (and @root.bookUser (eq @root.bookUser.status this))}}selected{{/if}}>
+            {{#each readStatus}}
+            <option value="{{this}}" {{#if (and @root.bookUser (eq @root.bookUser.readStatus this))}}selected{{/if}}>
                 {{this}}
             </option>
             {{/each}}
@@ -38,7 +39,7 @@
 <div>
     <form action="/comments/upsert" role="form" method="post">
         <input type="hidden" name="_csrf" value="{{_csrfToken}}">
-        <input type="hidden" name="bookId" value="{{bookId}}">
+        <input type="hidden" name="bookId" value="{{book.id}}">
         <input type="hidden" name="userEmail" value="{{currentUser.email}}">
         <label for="comment">
             <h2>Comments</h2>

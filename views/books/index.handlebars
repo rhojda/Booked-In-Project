@@ -2,8 +2,8 @@
 <a href="/books/form">Create a new book</a> {{!link to create new books in the books index page}}
 {{#each books}}
 <li>
-    <a href="/books/show/{{@index}}">{{@index}} - {{this.title}} - {{this.publishingYear}}</a> {{!link to show book
+    <a href="/books/show/{{this.id}}">{{this.id}} - {{this.title}} - {{this.publishingYear}}</a> {{!link to show book
     details}}
-    <a href="/books/edit?id={{@index}}">Edit</a> {{!link to edit books in the books index page}}
+    <a href="/books/edit?id={{this.id}}">Edit</a> {{!link to edit books in the books index page}}
 </li>
 {{/each}}

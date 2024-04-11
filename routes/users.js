@@ -86,10 +86,7 @@ router.get('/profile', async (req, res, next) => {
     if (helpers.isNotLoggedIn(req, res)) {
         return
     }
-    const booksUser = BookUser.AllForUser(req.session.currentUser.email);
-    booksUser.forEach((bookUser) => { //we get all books_users for the current user
-        bookUser.book = Book.get(bookUser.bookId) //get the book information
-    })
+    const booksUser = await BookUser.AllForUser(req.session.currentUser);
     res.render('users/profile',
         {
             title: 'BookedIn || Profile',
